@@ -25,8 +25,8 @@ class ProductManager{
             else 
             {
                 //En caso que no exista y sea un nuevo producto agrega el id automatico y el producto, para que si se ingresa un producto no valido no se agregue
-                const newID = ProductManager.idAutomatico()
-                this.products.push({...newProduct, id: newID});
+                const idAutoincremental = ProductManager.idAutomatico()
+                this.products.push({id: idAutoincremental,...newProduct});
             }        
         }else{
             console.error("Debe tener todos los campos completos para agregarlo")
@@ -90,9 +90,10 @@ productMaganer.addProduct(productoPrueba);
 
 
 //Realizo las pruebas del tp
+//Listo todos los productos
 console.log(productMaganer.getProductos())
 //Intento agregar nuevamente el mismo producto para probar que si está repetido el code no lo agrega, se verá el "ya existe el producto" en la consola
 productMaganer.addProduct(productoPrueba);
 
-console.log(productMaganer.getProductById(6)); 
+console.log(productMaganer.getProductById(3)); 
 console.log(productMaganer.getProductById(654966)); //Devuelve undefined aparte de el mensaje ya que no existe y el return no tiene nada, por lo tanto al querer mostrar algo que no tiene nada, da undefined (tambien podria devolver null al ponerle return null pero lo dejé asi ya que es practicamente lo mismo)
