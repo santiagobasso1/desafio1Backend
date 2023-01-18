@@ -25,9 +25,10 @@ class ProductManager{
     constructor(){
         this.products = [];
     }    
-    addProduct(newProduct){  
-        //Utilicé el filter ya que con el "includes" no me dejaba ya que tengo objetos y no datos simples
+    addProduct(newProduct){          
+        //Reviso que tenga datos, ya que no puede agregar con un campo vacio
         if ( toString(newProduct.id).length>0 && newProduct.title.length>0 && newProduct.description.length>0 && toString(newProduct.price).length>0 && newProduct.thumbnail.length>0 && newProduct.code.length>0 && toString(newProduct.stock).length>0){
+            //Utilicé el filter ya que con el "includes" no me dejaba ya que tengo objetos y no datos simples
             if (this.products.filter(product=> product.code==newProduct.code).length > 0)
             {
                 console.error("Ya existe el producto");
@@ -77,8 +78,10 @@ productMaganer.addProduct(producto2);
 productMaganer.addProduct(producto3);
 productMaganer.addProduct(producto4);
 productMaganer.addProduct(producto5);
+
 //Esto de abajo dará un mensaje que dice "Debe tener todos los campos completos para agregarlo" ya que es un objeto "vacio"
 productMaganer.addProduct(productoVacio);
+
 productMaganer.addProduct(productoPrueba);
 
 
