@@ -1,6 +1,5 @@
 class Producto{    
     constructor(title,description,price,thumbnail,code,stock){
-        this.id = Producto.idAutomatico();
         this.title = title;
         this.description = description;
         this.price = price;
@@ -8,16 +7,6 @@ class Producto{
         this.code = code;
         this.stock = stock;
     }
-    //Hice una clase estatica para el id automatico, así no tengo que ingresarlo y es autoincremental como el profe dijo
-    static idAutomatico() {
-        if (!this.idAnterior) {
-          this.idAnterior = 1
-        }
-        else {
-          this.idAnterior++
-        }
-        return this.idAnterior
-      }
 }
 
 
@@ -35,7 +24,9 @@ class ProductManager{
             }
             else 
             {
-                this.products.push(newProduct);
+                //En caso que no exista y sea un nuevo producto agrega el id automatico y el producto, para que si se ingresa un producto no valido no se agregue
+                const newID = ProductManager.idAutomatico()
+                this.products.push({...newProduct, id: newID});
             }        
         }else{
             console.error("Debe tener todos los campos completos para agregarlo")
@@ -53,6 +44,17 @@ class ProductManager{
             return "Product Not found";
         }
     }
+    //Hice una clase estatica para el id automatico, así no tengo que ingresarlo y es autoincremental como el profe dijo
+
+    static idAutomatico() {
+        if (!this.idAnterior) {
+          this.idAnterior = 1
+        }
+        else {
+          this.idAnterior++
+        }
+        return this.idAnterior
+      }
 
 }
 
@@ -63,8 +65,9 @@ const producto2=new Producto("Z590 Ultra","Motherboard Gama Alta",82000,"https:/
 const producto3=new Producto("Zenith II Alpha","Motherboard Gama Alta",1000000,"https://firebasestorage.googleapis.com/v0/b/ecommercereact2022.appspot.com/o/ROGthreadripper.jpg?alt=media&token=bfa7fdda-23a5-4c84-92c5-e33dbb3ac93a","aaac",56);
 const producto4=new Producto("Rx 5500 xt ASUS","Grafica Gama Media Alta",100000,"https://firebasestorage.googleapis.com/v0/b/ecommercereact2022.appspot.com/o/rx5500xt.jpg?alt=media&token=f28c7534-425f-497f-b90e-911baea8b560","aaad",32);
 const producto5=new Producto("I7 4790","Procesador Gama Media",82000,"https://firebasestorage.googleapis.com/v0/b/ecommercereact2022.appspot.com/o/i7_4790.jpg?alt=media&token=9180a992-2129-4ce9-b89e-08c8fdfcc7ac","aaae",22);
-const productoPrueba=new Producto("producto prueba","Este es un producto prueba",200,"Sin Imagen","abc123",25);
 const productoVacio=new Producto("","","","","","");
+const productoPrueba=new Producto("producto prueba","Este es un producto prueba",200,"Sin Imagen","abc123",25);
+
 
 //Creo un product manager
 productMaganer=new ProductManager()
